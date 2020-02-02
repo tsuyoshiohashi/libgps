@@ -1,7 +1,10 @@
 
 My RPI board needs to change serial port for GPS.
+
 serial.h
+
   /* #define PORTNAME "/dev/ttyAMA0" */
+  
   #define PORTNAME "/dev/serial0"
 
 ====================================================
