@@ -7,6 +7,7 @@ serial.h
   
   #define PORTNAME "/dev/serial0"
   
+  
   Which port depends on the board serial settings, BT and etc, I think...
 
 ====================================================
