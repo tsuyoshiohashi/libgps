@@ -5,6 +5,7 @@
 See sample `position_logger.c`
 
 ====================================================
+
 My RPI board needs to change serial port for GPS.
  
   Which port depends on the board serial settings, BT and etc, I think...
