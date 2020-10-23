@@ -17,6 +17,9 @@
 #define NMEA_MESSAGE_ERR 0xC0
 
 struct gpgga {
+    
+    // UTC Time eg: 085120.307 ( 08:51:20.507)
+    double utc_time;
     // Latitude eg: 4124.8963 (XXYY.ZZKK.. DEG, MIN, SEC.SS)
     double latitude;
     // Latitude eg: N
@@ -35,6 +38,11 @@ struct gpgga {
 typedef struct gpgga gpgga_t;
 
 struct gprmc {
+    // UTC Date eg: 221020 ( ddmmyy)
+    double utc_date;
+    // UTC Time (hhmmss.ss)
+    double utc_time;
+
     double latitude;
     char lat;
     double longitude;

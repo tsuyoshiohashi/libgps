@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include <math.h>
+#include <time.h>
 
 #include "nmea.h"
 #include "serial.h"
@@ -36,6 +37,7 @@ extern void gps_location(loc_t *coord) {
                 coord->latitude = gpgga.latitude;
                 coord->longitude = gpgga.longitude;
                 coord->altitude = gpgga.altitude;
+                coord->utc_time = gpgga.utc_time;
 
                 status |= NMEA_GPGGA;
                 break;
@@ -44,6 +46,7 @@ extern void gps_location(loc_t *coord) {
 
                 coord->speed = gprmc.speed;
                 coord->course = gprmc.course;
+                coord->utc_date = gprmc.utc_date;
 
                 status |= NMEA_GPRMC;
                 break;
@@ -54,6 +57,23 @@ extern void gps_location(loc_t *coord) {
 extern void gps_off(void) {
     //Write off
     serial_close();
+}
+
+// Get date and utc time
+void gps_time( struct tm *l_tm){
+    loc_t data;
+
+    gps_location(&data);
+
+    // ddmmyy
+    l_tm->tm_year = data.utc_date % 100 ;
+    l_tm->tm_mon = ((data.utc_date - l_tm->tm_year) / 100) % 100 ;
+    l_tm->tm_mday = data.utc_date /10000;
+    // hhmmss.ss
+    l_tm->tm_sec = ((int)data.utc_time % 100) ;
+    l_tm->tm_min = ((int)(((int)data.utc_time - l_tm->tm_sec) / 100) % 100);
+    l_tm->tm_hour = ((int)data.utc_time / 10000);
+    
 }
 
 // Convert lat e lon to decimals (from deg)

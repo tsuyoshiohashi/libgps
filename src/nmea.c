@@ -10,7 +10,8 @@ void nmea_parse_gpgga(char *nmea, gpgga_t *loc)
 {
     char *p = nmea;
 
-    p = strchr(p, ',')+1; //skip time
+    p = strchr(p, ',')+1; // NOT skip time
+    loc->utc_time = atof(p);
 
     p = strchr(p, ',')+1;
     loc->latitude = atof(p);
@@ -60,7 +61,9 @@ void nmea_parse_gprmc(char *nmea, gprmc_t *loc)
 {
     char *p = nmea;
 
-    p = strchr(p, ',')+1; //skip time
+    p = strchr(p, ',')+1; // skip time
+    //loc->utc_time = atof(p);
+
     p = strchr(p, ',')+1; //skip status
 
     p = strchr(p, ',')+1;
@@ -100,6 +103,10 @@ void nmea_parse_gprmc(char *nmea, gprmc_t *loc)
 
     p = strchr(p, ',')+1;
     loc->course = atof(p);
+
+    p = strchr(p, ',')+1;   // Date
+    loc->utc_date = atoi(p);
+
 }
 
 /**
