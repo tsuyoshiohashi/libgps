@@ -1,4 +1,10 @@
 
+
+* `gps_time` - Expose date and time from GPS (year, month, day, hour, mionute, second)
+
+See sample `position_logger.c`
+
+====================================================
 My RPI board needs to change serial port for GPS.
  
   Which port depends on the board serial settings, BT and etc, I think...
@@ -7,9 +13,7 @@ serial.h
 
   /* #define PORTNAME "/dev/ttyAMA0" */
   
-  #define PORTNAME "/dev/serial0"
-  
-  
+  #define PORTNAME "/dev/serial0"  
  
 
 ====================================================
